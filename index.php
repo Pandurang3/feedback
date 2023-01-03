@@ -5,46 +5,63 @@
   $name = $email = $body = '';
   $nameErr = $emailErr = $bodyErr = '';
 
-  //form submit
+  // form submit
   if(isset($_POST['submit'])) {
 
-    //validate name
+    // validate name
     if(empty($_POST['name'])) {
       $nameErr = 'Name is reqiured';
     }else{
       $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    //validate email
+    // validate email
     if(empty($_POST['email'])) {
       $emailErr = 'Email is reqiured';
     }else{
       $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     }
 
-    //validate body
+    // validate body
     if(empty($_POST['body'])) {
       $bodyErr = 'Feedback is reqiured';
     }else{
       $body = filter_input(INPUT_POST, 'body', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
-    if(empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
+    //mysql style
+    // if(empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
       //insert data in mysql table
-      $sql = "INSERT INTO feedback(name, email, body) VALUES('$name', '$email', '$body')";
+      // $sql = "INSERT INTO feedback(name, email, body) VALUES('$name', '$email', '$body')";
 
-      if(mysqli_query($conn, $sql)){
+      // if(mysqli_query($conn, $sql)){
         //success
-        header('Location: feedback.php');
-      }else{
+      //   header('Location: feedback.php');
+      // }else{
         //error
-        echo 'Error ' . mysqli_error($conn);
+  //       echo 'Error ' . mysqli_error($conn);
+  //     }
+  //   }
+
+
+      //PDO Style
+      if(empty($nameErr) && empty($emailErr) && empty($bodyErr))  {
+        $sql = "INSERT INTO feedback (name, email, body) VALUES (:name, :email, :body)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(
+            ':name' => $name,
+            ':email' => $email,
+            ':body' => $body
+        ));
+        echo "data Inserted Sucessfully";
+        header("location: feedback.php");
+      }else{
+        echo "Error Inserting data";
       }
-    }
 
   }
 
- 
+        
 ?>
 
     <img src="/php_pro/feedback-project/img/logo.png" class="w-20 mb-3" alt="">
