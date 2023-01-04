@@ -62,6 +62,8 @@
 
     <?php endforeach;  ?>
 
+    <!-- <button> <a href="edit-feedback.php?id=<?php echo $item['id'] ?>">  </button>
+    <input type='button' onclick="location.href='temp2.php?id=<?php echo $item['id'] ?>'"/> -->
    
 
 <?php include 'inc/footer.php'; ?>
