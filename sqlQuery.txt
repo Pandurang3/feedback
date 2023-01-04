@@ -1,0 +1,4 @@
+$selectSQL = "SELECT * FROM feedback";
+$insertSQL = "INSERT INTO feedback (name, email, body) VALUES (:name, :email, :body)";
+$updateSQL = "UPDATE feedback SET name=:name, email=:email, body=:body WHERE id = '$id'";
+$deleteSQL = "DELETE FROM `feedback` WHERE `feedback`.`id` = 7";

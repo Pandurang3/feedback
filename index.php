@@ -53,7 +53,7 @@
             ':email' => $email,
             ':body' => $body
         ));
-        echo "data Inserted Sucessfully";
+        echo "alert('data Inserted Sucessfully')";
         header("location: feedback.php");
       }else{
         echo "Error Inserting data";

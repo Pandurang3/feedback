@@ -29,14 +29,14 @@
   // $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   //PDO style
-  $sql = "SELECT * FROM feedback";
+  $sql = "SELECT * FROM feedback order by id DESC ";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
   $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
 ?>
    
-    <h2>Past Feedback</h2>
+    <h2>New Feedback</h2>
 
     <?php if(empty($stmt)): ?>
       <p class="lead mt3">There is no Feedback</p>
@@ -50,11 +50,12 @@
          <div class="text-secondary mt-2">
             By <?php echo $item['id'] . " " . $item['name']; ?> On <?php echo $item['date']; ?>
          </div>
+         <?php echo $item['email']; ?>
         </div>
         <div class="row">
           <div class="col-sm-12 text-center mb-3">
-            <button>Edit</button>
-            <button>DELETE</button>
+            <button> <a href="edit-feedback.php?id=<?php echo $item['id'] ?>">Edit</a> </button>
+            <button> <a href="delete-feedback.php?id=<?php echo $item["id"]; ?>">Delete</a> </button>
           </div>
         </div>
       </div>
