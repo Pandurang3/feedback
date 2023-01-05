@@ -43,7 +43,7 @@
     <?php endif; ?>  
 
     <?php foreach($stmt as $item): ?>
-     
+      
       <div class="card my-3 w-75">
         <div class="card-body text-center">
          <?php echo $item['body']; ?>
